@@ -8,7 +8,7 @@ exports.create_ephemeral = async(request, response)=>{
           return;
         }
         let paymentData = {
-            customer : req.body.customerId,
+            customer : request.body.customerId,
             stripe_version: stripe_version
         };
 
