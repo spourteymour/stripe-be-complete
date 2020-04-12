@@ -32,6 +32,7 @@ exports.confirmIntent = async(payload)=>{
 exports.create_ephemeral = async(payload)=>{
   return await new Promise(async(resolve, reject)=>{
     try {
+      console.log("Payload", payload);
       libs.ephemeralKeys.create(payload.customerId, payload.stripe_version)
       .then((key) => {
           response.status(200).send(key);
