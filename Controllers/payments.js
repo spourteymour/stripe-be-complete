@@ -1,6 +1,6 @@
 const libs = require('../libs/stripeFunctions');
 
-exports.createEphemeral = async(request, response)=>{
+exports.create_ephemeral = async(request, response)=>{
 
     const stripe_version = request.body.api_version;
     if (!stripe_version) {
