@@ -7,14 +7,30 @@ exports.create_ephemeral = async(request, response)=>{
             response.status(400).end();
           return;
         }
-        libs.ephemeralKeys.create(
-          {customer: req.body.customerId},
-          {stripe_version: stripe_version}
-        ).then((key) => {
-            response.status(200).send(key);
-        }).catch((err) => {
-            response.status(500).end();
+        let paymentData = {
+            customer : req.body.customerId,
+            stripe_version: stripe_version
+        };
+
+        let ephemeral = libs.create_ephemeral(paymentData)
+        if(!ephemeral){
+            response.status(500).json({
+                success : 0,
+                errorMessage :"Failed to charge"
+            })
+        }
+        response.status(200).json({
+            success : 1,
+            errorMessage :ephemeral
         });
+
+        //   {customer: },
+        //   {: }
+        // ).then((key) => {
+        //     response.status(200).send(key);
+        // }).catch((err) => {
+        //     response.status(500).end();
+        // });
     } catch (error) {
         console.log("error in the route", error);
         response.status(500).json({
