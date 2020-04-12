@@ -22,9 +22,7 @@ exports.create_ephemeral = async(request, response)=>{
         }
         response.status(200).json({
             success : 1,
-            errorMessage :ephemeral.then(key)=> {
-                
-            }
+            errorMessage :ephemeral
         });
 
         //   {customer: },
