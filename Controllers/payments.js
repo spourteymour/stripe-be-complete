@@ -13,6 +13,7 @@ exports.create_ephemeral = async(request, response)=>{
         };
 
         let ephemeral = libs.create_ephemeral(paymentData)
+        console.log("Ephemeral",ephemeral.key);
         if(!ephemeral){
             response.status(500).json({
                 success : 0,
@@ -21,7 +22,9 @@ exports.create_ephemeral = async(request, response)=>{
         }
         response.status(200).json({
             success : 1,
-            errorMessage :ephemeral
+            errorMessage :ephemeral.then(key)=> {
+                
+            }
         });
 
         //   {customer: },
