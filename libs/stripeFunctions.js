@@ -33,7 +33,7 @@ exports.create_ephemeral = async(payload)=>{
   return await new Promise(async(resolve, reject)=>{
     try {
       console.log("Payload", payload);
-      stripe.ephemeralKeys.create({customer: payload.customer}, {stripe_version: payload.stripe_version})
+      stripe.ephemeralKeys.create({customer: payload.customer}, {apiVersion: payload.stripe_version})
       .then((key) => {
           response.status(200).send(key);
       }).catch((err) => {
