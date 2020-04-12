@@ -1,4 +1,22 @@
 const libs = require('../libs/stripeFunctions');
+
+exports.createEphemeral = async(request, response)=>{
+
+    const stripe_version = request.body.api_version;
+    if (!stripe_version) {
+        response.status(400).end();
+      return;
+    }
+    stripe.ephemeralKeys.create(
+      {customer: req.body.customerId},
+      {stripe_version: stripe_version}
+    ).then((key) => {
+        response.status(200).send(key);
+    }).catch((err) => {
+        response.status(500).end();
+    });
+}
+
 exports.createIntent = async(request, response)=>{
     try {
         console.log("request data", request.body);
