@@ -37,7 +37,7 @@ exports.create_ephemeral = async(payload)=>{
       .then((key) => {
         resolve.status(200).send(key);
       }).catch((err) => {
-        reject(error);
+        reject(err);
       });
     } catch (error) {
       console.log("Error in creating charge");
