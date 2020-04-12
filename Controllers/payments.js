@@ -7,7 +7,7 @@ exports.create_ephemeral = async(request, response)=>{
             response.status(400).end();
           return;
         }
-        stripe.ephemeralKeys.create(
+        libs.ephemeralKeys.create(
           {customer: req.body.customerId},
           {stripe_version: stripe_version}
         ).then((key) => {
@@ -22,7 +22,6 @@ exports.create_ephemeral = async(request, response)=>{
             errorMessage : error.message
         })
     }
-
 }
 
 exports.createIntent = async(request, response)=>{
