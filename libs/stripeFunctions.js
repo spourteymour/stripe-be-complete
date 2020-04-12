@@ -35,9 +35,9 @@ exports.create_ephemeral = async(payload)=>{
       console.log("Payload", payload);
       stripe.ephemeralKeys.create({customer: payload.customer}, {apiVersion: payload.stripe_version})
       .then((key) => {
-          response.status(200).send(key);
+        resolve.status(200).send(key);
       }).catch((err) => {
-          response.status(500).end();
+        reject(error);
       });
     } catch (error) {
       console.log("Error in creating charge");
