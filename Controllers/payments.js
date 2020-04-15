@@ -51,25 +51,28 @@ exports.createIntent = async(request, response)=>{
                 buyer_id: request.body.buyer_id,
                 seller_id: request.body.seller_id,
                 item_id : request.body.item_id,
-                sessionDate:request.body.sessionDate
+                sessionDate:request.body.sessionDate,
+                useStripeSdk: request.body.useStripeSdk,
+                paymentMethodId: request.body.paymentMethodId,
             }
         };
         let createIntent = await libs.createIntent(paymentData);
-        if(!createIntent){
-            response.status(500).json({
+        if(createIntent.statusCode == 400){
+            return response.status(500).json({
                 success : 0,
-                errorMessage :"Failed to charge"
+                errorMessage :createIntent.raw.message
             })
         }
         response.status(200).json({
             success : 1,
-            errorMessage :createIntent
+            payload :createIntent
         })
     } catch (error) {
         console.log("error in the route", error);
         response.status(500).json({
             success : 0,
-            errorMessage : error.message
+            errorMessage : error.message,
+            error : error
         })
     }
 }
